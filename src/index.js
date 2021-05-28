@@ -96,7 +96,7 @@ const run = (randomize = _.shuffle) => {
   if (!fifteen.solvable(fifteen.order)) fifteen.swap(0, 1);
 
   fifteen.draw();
-  document.addEventListener('keyup', (e) => {
+  document.addEventListener('keyup', function handler(e) {
     fifteen.count += 1;
     // console.log(fifteen.count);
 
@@ -104,9 +104,9 @@ const run = (randomize = _.shuffle) => {
       fifteen.draw();
     }
     if (fifteen.isCompleted()) {
-        document.querySelector('table').style.backgroundColor = "gold";
-        window.removeEventListener('keyup', handler);
-        alert(`Поздравляю!!! \nВы собрали пазл за ${fifteen.count} шагов!`);
+      document.querySelector('table').style.backgroundColor = 'gold';
+      window.removeEventListener('keyup', handler);
+      alert(`Поздравляю!!! \nВы собрали пазл за ${fifteen.count} шагов!`);
     }
   });
 };
