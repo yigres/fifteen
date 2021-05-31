@@ -106,6 +106,7 @@ const run = (randomize = _.shuffle) => {
     if (fifteen.isCompleted()) {
       document.querySelector('table').style.backgroundColor = 'gold';
       window.removeEventListener('keyup', handler);
+      // eslint-disable-next-line no-alert
       alert(`Поздравляю!!! \nВы собрали пазл за ${fifteen.count} шагов!`);
     }
   });
