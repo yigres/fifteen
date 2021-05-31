@@ -26,9 +26,9 @@ jobs:
       
       - name: install dependencies
         run: make install
-        # Add environment variables
-        # env:
-        #   CI: true
+        Add environment variables
+        env:
+          CI: true
       # - name: Run linter
       #   run:
       #     make lint
