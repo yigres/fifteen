@@ -28,7 +28,6 @@
   "dependencies": {
     "bootstrap": "^4.1.1",
     "jQuery": "^1.7.4",
-    "lodash": "^4.17.21",
-    "popper": "^1.0.1"
+    "lodash": "^4.17.21"
   }
 }
