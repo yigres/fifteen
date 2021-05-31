@@ -25,3 +25,5 @@ jobs:
       
       - name: install dependencies
         run: make install
+        env:
+          CI: true
