@@ -24,4 +24,4 @@ Only do it!!!
   
 ![image](src/game-target.png)  
 
-[Go to fifteen](https://fifteen-mu.vercel.app/)
+[Go to fifteen](https://fifteen-yigres.vercel.app/)
