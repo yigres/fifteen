@@ -5,12 +5,12 @@ const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 const run = (randomize = _.shuffle) => {
   const fifteen = {
-    order: randomize(values).concat(0),
+    randomValues: randomize(values).concat(0),
     count: 0,
     hole: 15,
     // Проверка на собранность
     isCompleted() {
-      return !this.order.some((item, i) => item > 0 && item - 1 !== i);
+      return !this.randomValues.some((item, i) => item > 0 && item - 1 !== i);
     },
     move: {
       ArrowUp: 1,
@@ -21,7 +21,7 @@ const run = (randomize = _.shuffle) => {
 
     go(step) {
       const index = this.hole + step;
-      if (!this.order[index]) {
+      if (!this.randomValues[index]) {
         return false;
       }
       // не всякое движение вправо-влево допустимо
@@ -30,16 +30,38 @@ const run = (randomize = _.shuffle) => {
           return false;
         }
       }
-      this.swap(index, this.hole);
-      this.hole = index;
+
+      const tableEl = document.querySelector('table');
+
+      const holeRowIndex = this.hole % 4;
+      const holeCellIndex = Math.floor(this.hole / 4);
+      const newPositionRowIndex = index % 4;
+      const newPositionCellIndex = Math.floor(index / 4);
+      // console.log(`[holeRowIndex, holeCellIndex] = ${[holeRowIndex, holeCellIndex]}`);
+      // console.log(`this.randomValues = ${this.randomValues}`);
+
+      const row = tableEl.rows.item(newPositionRowIndex);
+      if (row) {
+        const cell = row.cells.item(newPositionCellIndex);
+        if (cell) {
+          const point = tableEl.rows.item(holeRowIndex).cells.item(holeCellIndex);
+          point.textContent = cell.textContent;
+          point.classList.remove('table-active');
+          cell.textContent = '';
+          cell.classList.add('table-active');
+          this.swap(index, this.hole);
+          this.hole = index;
+        }
+      }
+      // console.log(`this.randomValues = ${this.randomValues}`);
       return true;
     },
 
     // перестановка ячеек
     swap(i1, i2) {
-      const t = this.order[i1];
-      this.order[i1] = this.order[i2];
-      this.order[i2] = t;
+      const t = this.randomValues[i1];
+      this.randomValues[i1] = this.randomValues[i2];
+      this.randomValues[i2] = t;
     },
     // проверка на решаемость
     solvable(a) {
@@ -65,26 +87,23 @@ const run = (randomize = _.shuffle) => {
         for (let j = 0; j < 4; j += 1) {
           const cell = row.insertCell();
           cell.className = 'p-3';
-          if (this.order[i + (j * 4)] === 0) {
+          if (this.randomValues[i + (j * 4)] === 0) {
             cell.classList.add('table-active');
           }
-          cell.textContent = this.order[i + (j * 4)] || '';
+          cell.textContent = this.randomValues[i + (j * 4)] || '';
         }
       }
     },
   };
 
   // Если пазл нерешаемый, делаем его решаемым.
-  if (!fifteen.solvable(fifteen.order)) fifteen.swap(0, 1);
+  if (!fifteen.solvable(fifteen.randomValues)) fifteen.swap(0, 1);
 
   fifteen.draw();
   document.addEventListener('keyup', function handler(e) {
     fifteen.count += 1;
     // console.log(fifteen.count);
-
-    if (fifteen.go(fifteen.move[e.key])) {
-      fifteen.draw();
-    }
+    fifteen.go(fifteen.move[e.key]);
     if (fifteen.isCompleted()) {
       document.querySelector('table').style.backgroundColor = 'gold';
       window.removeEventListener('keyup', handler);
