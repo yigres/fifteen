@@ -127,7 +127,7 @@ const run = (randomize = _.shuffle) => {
     [finalPoint] = event.changedTouches;
     const xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
     const yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
-    if (xAbs > 20 || xAbs > 20) {
+    if (xAbs > 2 || xAbs > 2) {
       if (xAbs > yAbs) {
         if (finalPoint.pageX < initialPoint.pageX) {
           fifteen.go(4);
