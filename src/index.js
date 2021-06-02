@@ -4,6 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 import $ from 'jquery';
 
+// // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+// const vh = window.innerHeight * 0.01;
+// // Then we set the value in the --vh custom property to the root of the document
+// document.documentElement.style.setProperty('--vh', `${vh}px`);
+
 const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 const run = (randomize = _.shuffle) => {

@@ -1,7 +1,11 @@
+html { 
+  overflow:  hidden;
+}
+
 /* body {
   height: 100vh; 
   height: calc(var(--vh, 1vh) * 100);
-  margin: 0 auto;
+  margin: 0;
 } */
 
 td {
