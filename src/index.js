@@ -1,3 +1,4 @@
+import './style.css';
 import _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
@@ -39,8 +40,6 @@ const run = (randomize = _.shuffle) => {
       const holeCellIndex = Math.floor(this.hole / 4);
       const newPositionRowIndex = index % 4;
       const newPositionCellIndex = Math.floor(index / 4);
-      // console.log(`[holeRowIndex, holeCellIndex] = ${[holeRowIndex, holeCellIndex]}`);
-      // console.log(`this.randomValues = ${this.randomValues}`);
 
       const row = tableEl.rows.item(newPositionRowIndex);
       if (row) {
@@ -55,7 +54,7 @@ const run = (randomize = _.shuffle) => {
           this.hole = index;
         }
       }
-      // console.log(`this.randomValues = ${this.randomValues}`);
+
       return true;
     },
 
