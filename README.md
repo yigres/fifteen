@@ -24,6 +24,6 @@ Only do it!!!
   
 ![image](src/game-target.png)  
 Control from buttons and touchpad.  
-You can also play on the web on your phone.
+You can also play on the web on your smartphone.
 
 [Go to fifteen](https://fifteen-yigres.vercel.app/)
