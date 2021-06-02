@@ -101,6 +101,7 @@ const run = (randomize = _.shuffle) => {
   if (!fifteen.solvable(fifteen.randomValues)) fifteen.swap(0, 1);
 
   fifteen.draw();
+
   document.addEventListener('keyup', function handler(e) {
     fifteen.count += 1;
     // console.log(fifteen.count);
@@ -112,6 +113,39 @@ const run = (randomize = _.shuffle) => {
       $('#exampleModal').modal('show');
     }
   });
+
+  let initialPoint;
+  let finalPoint;
+  document.addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    [initialPoint] = event.changedTouches;
+  }, false);
+  document.addEventListener('touchend', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    [finalPoint] = event.changedTouches;
+    const xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
+    const yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
+    if (xAbs > 20 || yAbs > 20) {
+      if (xAbs > yAbs) {
+        if (finalPoint.pageX < initialPoint.pageX) {
+          fifteen.go(4);
+          /* СВАЙП ВЛЕВО */
+        } else {
+          /* СВАЙП ВПРАВО */
+          fifteen.go(-4);
+        }
+      }
+      if (finalPoint.pageY < initialPoint.pageY) {
+        /* СВАЙП ВВЕРХ */
+        fifteen.go(1);
+      } else {
+        /* СВАЙП ВНИЗ */
+        fifteen.go(-1);
+      }
+    }
+  }, false);
 };
 
 run();
