@@ -54,41 +54,23 @@ const run = (randomize = _.shuffle) => {
     },
 
     draw() {
+      const root = document.querySelector('.gem-puzzle');
       document.querySelector('.gem-puzzle').innerHTML = '';
-      document.querySelector('.gem-puzzle').innerHTML = `
-      <table class="table-bordered">
-          <tbody>
-              <tr>
-                  <td class="p-3">${this.order[0] || ''}</td>
-                  <td class="p-3">${this.order[4] || ''}</td>
-                  <td class="p-3">${this.order[8] || ''}</td>
-                  <td class="p-3">${this.order[12] || ''}</td>
-              </tr>
-              <tr>
-                  <td class="p-3">${this.order[1] || ''}</td>
-                  <td class="p-3">${this.order[5] || ''}</td>
-                  <td class="p-3">${this.order[9] || ''}</td>
-                  <td class="p-3">${this.order[13] || ''}</td>
-              </tr>
-              <tr>
-                  <td class="p-3">${this.order[2] || ''}</td>
-                  <td class="p-3">${this.order[6] || ''}</td>
-                  <td class="p-3">${this.order[10] || ''}</td>
-                  <td class="p-3">${this.order[14] || ''}</td>
-              </tr>
-              <tr>
-                  <td class="p-3">${this.order[3] || ''}</td>
-                  <td class="p-3">${this.order[7] || ''}</td>
-                  <td class="p-3">${this.order[11] || ''}</td>
-                  <td class="p-3">${this.order[15] || ''}</td>
-              </tr>
-          </tbody>
-        </table>`;
-      document.querySelectorAll('.p-3').forEach((v) => {
-        if (v.textContent === '') {
-          v.classList.add('table-active');
+      const tableEl = document.createElement('table');
+      tableEl.className = 'table-bordered';
+      root.append(tableEl);
+
+      for (let i = 0; i < 4; i += 1) {
+        const row = tableEl.insertRow();
+        for (let j = 0; j < 4; j += 1) {
+          const cell = row.insertCell();
+          cell.className = 'p-3';
+          if (this.order[i + (j * 4)] === 0) {
+            cell.classList.add('table-active');
+          }
+          cell.textContent = this.order[i + (j * 4)] || '';
         }
-      });
+      }
     },
   };
 
