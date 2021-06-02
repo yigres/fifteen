@@ -1,12 +1,13 @@
-html { 
+html, body { 
   overflow:  hidden;
+  margin: 0;
+  padding: 0;
 }
 
-/* body {
+body {
   height: 100vh; 
-  height: calc(var(--vh, 1vh) * 100);
-  margin: 0;
-} */
+  /* height: calc(var(--vh, 1vh) * 100); */
+}
 
 td {
   width: 51px;
