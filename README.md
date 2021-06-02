@@ -23,5 +23,7 @@ Move:
 Only do it!!!  
   
 ![image](src/game-target.png)  
+Control from buttons and touchpad.  
+You can also play on the web on your phone.
 
 [Go to fifteen](https://fifteen-yigres.vercel.app/)
