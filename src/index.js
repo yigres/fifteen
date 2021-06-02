@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap';
+import $ from 'jquery';
 
 const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
@@ -106,9 +108,9 @@ const run = (randomize = _.shuffle) => {
     fifteen.go(fifteen.move[e.key]);
     if (fifteen.isCompleted()) {
       document.querySelector('table').style.backgroundColor = 'gold';
-      window.removeEventListener('keyup', handler);
-      // eslint-disable-next-line no-alert
-      alert(`Поздравляю!!! \nВы собрали пазл за ${fifteen.count} шагов!`);
+      document.removeEventListener('keyup', handler, null);
+      document.querySelector('div.modal-body').textContent = `Вы собрали пазл за ${fifteen.count} шагов!`;
+      $('#exampleModal').modal('show');
     }
   });
 };
