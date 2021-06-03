@@ -6,7 +6,7 @@ import $ from 'jquery';
 
 const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-const run = (randomize = _.shuffle) => {
+const run = (randomize = _.identity) => {
   const fifteen = {
     randomValues: randomize(values).concat(0),
     count: 0,
@@ -95,9 +95,8 @@ const run = (randomize = _.shuffle) => {
         }
       }
     },
-    showResult(handler) {
+    showResult() {
       document.querySelector('table').style.backgroundColor = 'gold';
-      document.removeEventListener('keyup', handler, null);
       document.querySelector('div.modal-body').textContent = `Вы собрали пазл за ${this.count} шагов!`;
       $('#exampleModal').modal('show');
     },
@@ -113,18 +112,21 @@ const run = (randomize = _.shuffle) => {
     fifteen.go(fifteen.move[e.key]);
 
     if (fifteen.isCompleted()) {
+      document.removeEventListener('keyup', handler);
       fifteen.showResult(handler);
     }
   });
 
   let initialPoint;
   let finalPoint;
-  document.addEventListener('touchstart', (event) => {
+  const handler1 = (event) => {
     event.preventDefault();
     event.stopPropagation();
     [initialPoint] = event.changedTouches;
-  }, false);
-  document.addEventListener('touchend', function handler(event) {
+  };
+
+  document.addEventListener('touchstart', handler1);
+  document.addEventListener('touchend', function handler2(event) {
     fifteen.count += 1;
     event.preventDefault();
     event.stopPropagation();
@@ -150,9 +152,11 @@ const run = (randomize = _.shuffle) => {
     }
 
     if (fifteen.isCompleted()) {
-      fifteen.showResult(handler);
+      document.removeEventListener('touchstart', handler1);
+      document.removeEventListener('touchend', handler2);
+      fifteen.showResult();
     }
-  }, false);
+  });
 };
 
 run();
