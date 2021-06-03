@@ -6,7 +6,7 @@ import $ from 'jquery';
 
 const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-const run = (randomize = _.identity) => {
+const run = (randomize = _.shuffle) => {
   const fifteen = {
     randomValues: randomize(values).concat(0),
     count: 0,
